@@ -7,6 +7,7 @@ const getUsername = () => {
     const username = argUsername ? argUsername.split('=')[1] : "User";
 
     console.log(`Welcome to the File Manager, ${username}!`);
+    return username;
 };
 
 export default getUsername;
