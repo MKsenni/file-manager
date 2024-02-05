@@ -1,4 +1,4 @@
-import { readdir, access } from 'node:fs';
+import { readdir, readFile } from 'node:fs';
 import path from 'node:path';
 
 export function getList(currentDir) {
@@ -10,8 +10,24 @@ export function getList(currentDir) {
     for (let file of files) {
       file.isFile() ? isFiles.push(file.name) : isFolders.push(file.name);
     }
-    
-    isFolders.forEach(folder => console.log('Folder\t' + folder));
-    isFiles.forEach(file => console.log('File\t' + file));
-  })
+
+    const dataTable = [];
+    isFolders.forEach((folder) => dataTable.push({Name: folder, Type: 'directory'}));
+    isFiles.forEach((file) =>  dataTable.push({Name: file, Type: 'file'}));
+
+    console.table(dataTable);
+  });
+}
+
+export function basicOperations(currentPath) {
+  const [command, ...args] = currentPath.split(' ');
+  const {dir, base} = path.parse(args.join(' '));
+  const newPath = path.join(dir, base);
+  switch(command) {
+    case 'cat':
+      readFile(newPath, 'utf8', (err, data) => {
+        if (err) throw err;
+        console.log(data);
+    })
+  }
 }

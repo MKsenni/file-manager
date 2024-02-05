@@ -4,7 +4,7 @@ import { stdin as input, stdout as output } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import path, { dirname } from 'node:path';
 import { getHomedir, goToUpDir, navigateToDir } from './navigate.js';
-import { getList } from './filesistem.js';
+import { basicOperations, getList } from './filesistem.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,6 +32,7 @@ try {
           getList(currentDir);
           break;
       }
+      basicOperations(line);
       console.log(`You are currently in ${currentDir}`);
     }
   });
