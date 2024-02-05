@@ -1,10 +1,10 @@
-import { readdir, readFile, access, writeFile , createReadStream, rename, createWriteStream, unlink } from 'node:fs';
+import { readdir, writeFile , createReadStream, rename, createWriteStream, unlink } from 'node:fs';
 import path from 'node:path';
 import { pipeline } from 'node:stream';
 
 export function getList(currentDir) {
   readdir(currentDir, {withFileTypes: true}, (err, files) => {
-    if (err) throw new Error('Get list failed');
+    if (err) console.log('Get list failed', err);
     const isFiles = [].sort();
     const isFolders = [].sort();
 
@@ -57,15 +57,15 @@ export function basicOperations(currentPath, currentDir) {
       const readableMV = createReadStream(moveFileName);
       const writableMV = createWriteStream(folderForMove);
       pipeline(readableMV, writableMV, (err) => {
-        if (err) throw err;
+        if (err) console.log('Operation failed', err);
         unlink(moveFileName, (err) => {
-          if (err) throw err;
+          if (err) console.log('Operation failed', err);
         });
       })
       break;
     case 'rm':
       unlink(newFilePath, (err) => {
-        if (err) throw err;
+        if (err) console.log('Operation failed', err);
       });
       break;
   }
