@@ -20,12 +20,13 @@ export function goToUpDir(currentDir, homedir) {
 }
 
 export async function navigateToDir(currentDir, nextPath) {
-  const newpath = path.resolve(currentDir, nextPath);
+  const newpath = path.join(currentDir, nextPath);
 
   try {
-    await access(newpath, constants.R_OK | constants.W_OK);
+    access(newpath, constants.R_OK | constants.W_OK);
     return newpath;
-  } catch(err) {
-    console.log(`Cannot access in ${nextPath}`, err);
+  } catch {
+    console.error(`Cannot access in ${nextPath}`);
+    return null;
   }
 }

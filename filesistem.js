@@ -28,7 +28,7 @@ export function basicOperations(currentPath, currentDir) {
 
   switch(command) {
     case 'cat':
-      const readable = createReadStream(readFilePath);
+      const readable = createReadStream(newFilePath);
       readable.setEncoding('utf8');
       readable.pipe(process.stdout);
       break;
