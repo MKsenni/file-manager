@@ -23,9 +23,8 @@ export async function navigateToDir(currentDir, nextPath) {
 
   try {
     await access(newpath, constants.R_OK | constants.W_OK);
-    console.log(`can access ${newpath}`);
     return newpath;
   } catch {
-    console.error('cannot access');
-  } 
+    console.log(`Cannot access in ${nextPath}`);
+  }
 }

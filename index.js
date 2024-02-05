@@ -28,11 +28,11 @@ try {
         case 'cd':
           currentDir = await navigateToDir(currentDir, args[0]);
           break;
-        case 'list':
+        case 'ls':
           getList(currentDir);
           break;
       }
-      basicOperations(line);
+      basicOperations(line, currentDir);
       console.log(`You are currently in ${currentDir}`);
     }
   });
