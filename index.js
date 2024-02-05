@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import path, { dirname } from 'node:path';
 import { getHomedir, goToUpDir, navigateToDir } from './navigate.js';
 import { basicOperations, getList } from './filesistem.js';
+import { calculateHash } from './hash.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,6 +31,9 @@ try {
           break;
         case 'ls':
           getList(currentDir);
+          break;
+        case 'hash':
+          calculateHash(currentDir, args[0]);
           break;
       }
       basicOperations(line, currentDir);
